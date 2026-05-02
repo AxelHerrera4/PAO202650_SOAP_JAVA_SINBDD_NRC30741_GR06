@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>monster.edu.ec</groupId>
+    <artifactId>cli_ConUni_Java_GR6</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Sincronizado con tu WS a Java 21 -->
+        <maven.compiler.release>21</maven.compiler.release>
+        <exec.mainClass>monster.edu.ec.cli_conuni_java_gr6.Cli_ConUni_Java_GR6</exec.mainClass>
+    </properties>
+
+    <dependencies>
+        <!-- API de Jakarta XML WS (Sincronizado con el WS) -->
+        <dependency>
+            <groupId>jakarta.xml.ws</groupId>
+            <artifactId>jakarta.xml.ws-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <!-- Runtime necesario para que el cliente pueda ejecutar SOAP -->
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>4.0.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <!-- La URL que ya comprobamos que funciona -->
+                            <wsdlUrls>
+                                <wsdlUrl>http://localhost:8080/ws_ConUni_Java_GR6/ConversorWS?wsdl</wsdlUrl>
+                            </wsdlUrls>
+                            <!-- El paquete donde se crearán tus clases -->
+                            <packageName>monster.edu.ec.cliente</packageName>
+                            <sourceDestDir>${project.build.directory}/generated-sources/jaxws-wsimport</sourceDestDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.12.1</version>
+                <configuration>
+                    <release>21</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
