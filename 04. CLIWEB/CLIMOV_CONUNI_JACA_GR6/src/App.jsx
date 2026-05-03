@@ -11,6 +11,14 @@ const OPERACIONES_LONGITUD = [
   { code: 'mi_km', label: 'Millas a Kilometros', method: 'convertirMillasAKm', param: 'millas' },
 ]
 
+const OPERACIONES_MASA = [
+  { code: 'kg_g', label: 'Kilogramos a Gramos', method: 'convertirKgAGramos', param: 'kilogramos' },
+  { code: 'g_mg', label: 'Gramos a Miligramos', method: 'convertirGramosAMg', param: 'gramos' },
+  { code: 'lb_kg', label: 'Libras a Kilogramos', method: 'convertirLibrasAKg', param: 'libras' },
+  { code: 'oz_g', label: 'Onzas a Gramos', method: 'convertirOnzasAGramos', param: 'onzas' },
+  { code: 't_kg', label: 'Toneladas a Kilogramos', method: 'convertirToneladasAKg', param: 'toneladas' },
+]
+
 const OPERACIONES_TEMP = [
   { code: 'c_f', label: 'Celsius a Fahrenheit', method: 'convertirCtoF', param: 'gradosC' },
   { code: 'f_c', label: 'Fahrenheit a Celsius', method: 'convertirFtoC', param: 'gradosF' },
@@ -50,7 +58,7 @@ function App() {
   const [resultado, setResultado] = useState(null)
   const [unidadOrigen, setUnidadOrigen] = useState('')
   const [unidadDestino, setUnidadDestino] = useState('')
-  const operations = category === 'longitud' ? OPERACIONES_LONGITUD : OPERACIONES_TEMP
+  const operations = category === 'longitud' ? OPERACIONES_LONGITUD : category === 'masa' ? OPERACIONES_MASA : OPERACIONES_TEMP
 
   const handleLogin = (event) => {
     event.preventDefault()
@@ -139,8 +147,8 @@ function App() {
     <div className="desktop-shell">
       <div className="desktop-window">
         <header className="window-header">
-          <h1>{category === 'longitud' ? 'CONVERSOR MONSTER | LONGITUD' : 'CONVERSOR MONSTER | TEMPERATURA'}</h1>
-          <p>{category === 'longitud' ? 'Convierte entre kilometros, metros, centimetros, pulgadas, pies y millas.' : 'Convierte entre Celsius, Fahrenheit y Kelvin.'}</p>
+          <h1>{category === 'longitud' ? 'CONVERSOR MONSTER | LONGITUD' : category === 'masa' ? 'CONVERSOR MONSTER | MASA' : 'CONVERSOR MONSTER | TEMPERATURA'}</h1>
+          <p>{category === 'longitud' ? 'Convierte entre kilometros, metros, centimetros, pulgadas, pies y millas.' : category === 'masa' ? 'Convierte entre kilogramos, gramos, libras, onzas y toneladas.' : 'Convierte entre Celsius, Fahrenheit y Kelvin.'}</p>
         </header>
 
         <main className="converter-card">
@@ -151,7 +159,7 @@ function App() {
             onChange={(e) => {
               const nextCategory = e.target.value
               setCategory(nextCategory)
-              const nextOps = nextCategory === 'longitud' ? OPERACIONES_LONGITUD : OPERACIONES_TEMP
+              const nextOps = nextCategory === 'longitud' ? OPERACIONES_LONGITUD : nextCategory === 'masa' ? OPERACIONES_MASA : OPERACIONES_TEMP
               setOpCode(nextOps[0].code)
               setResultado(null)
               setUnidadOrigen('')
@@ -160,6 +168,7 @@ function App() {
           >
             <option value="temperatura">Temperatura</option>
             <option value="longitud">Longitud</option>
+            <option value="masa">Masa</option>
           </select>
 
           <label className="field-label">Operacion</label>
@@ -208,3 +217,4 @@ function App() {
 }
 
 export default App
+

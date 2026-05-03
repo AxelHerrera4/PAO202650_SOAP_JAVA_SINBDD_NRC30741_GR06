@@ -25,7 +25,8 @@ public class FrmConversor extends JFrame {
 
     public enum Categoria {
         TEMPERATURA,
-        LONGITUD
+        LONGITUD,
+        MASA
     }
 
     private static class OperacionItem {
@@ -262,7 +263,7 @@ public class FrmConversor extends JFrame {
                 new OperacionItem("FtoK", "Fahrenheit a Kelvin", "Ingresa grados Fahrenheit"),
                 new OperacionItem("KtoF", "Kelvin a Fahrenheit", "Ingresa grados Kelvin")
             }));
-        } else {
+        } else if (categoria == Categoria.LONGITUD) {
             lblTitulo.setText("CONVERSOR MONSTER | LONGITUD");
             lblDescripcion.setText("Convierte entre kilometros, metros, centimetros, pulgadas, pies y millas.");
             cbOperacion.setModel(new DefaultComboBoxModel<>(new OperacionItem[] {
@@ -271,6 +272,16 @@ public class FrmConversor extends JFrame {
                 new OperacionItem("PulgadasACm", "Pulgadas a Centimetros", "Ingresa pulgadas"),
                 new OperacionItem("PiesAMetros", "Pies a Metros", "Ingresa pies"),
                 new OperacionItem("MillasAKm", "Millas a Kilometros", "Ingresa millas"),
+            }));
+        } else {
+            lblTitulo.setText("CONVERSOR MONSTER | MASA");
+            lblDescripcion.setText("Convierte entre kilogramos, gramos, libras, onzas y toneladas.");
+            cbOperacion.setModel(new DefaultComboBoxModel<>(new OperacionItem[] {
+                new OperacionItem("KgAGramos", "Kilogramos a Gramos", "Ingresa kilogramos"),
+                new OperacionItem("GramosAMg", "Gramos a Miligramos", "Ingresa gramos"),
+                new OperacionItem("LibrasAKg", "Libras a Kilogramos", "Ingresa libras"),
+                new OperacionItem("OnzasAGramos", "Onzas a Gramos", "Ingresa onzas"),
+                new OperacionItem("ToneladasAKg", "Toneladas a Kilogramos", "Ingresa toneladas"),
             }));
         }
 
@@ -319,6 +330,11 @@ public class FrmConversor extends JFrame {
             case "PulgadasACm" -> port.convertirPulgadasACm(valor);
             case "PiesAMetros" -> port.convertirPiesAMetros(valor);
             case "MillasAKm" -> port.convertirMillasAKm(valor);
+            case "KgAGramos" -> port.convertirKgAGramos(valor);
+            case "GramosAMg" -> port.convertirGramosAMg(valor);
+            case "LibrasAKg" -> port.convertirLibrasAKg(valor);
+            case "OnzasAGramos" -> port.convertirOnzasAGramos(valor);
+            case "ToneladasAKg" -> port.convertirToneladasAKg(valor);
             default -> null;
         };
     }

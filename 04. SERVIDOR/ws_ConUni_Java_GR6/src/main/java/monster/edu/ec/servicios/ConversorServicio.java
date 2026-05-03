@@ -126,4 +126,66 @@ public class ConversorServicio {
         double pulgadas = cm / 2.54;
         return new Conversor(cm, "cm", pulgadas, "in");
     }
+
+    // ============ CONVERSIONES DE MASA ============
+
+    public Conversor kilogramosAGramos(double kg) {
+        // 1 kg = 1000 g
+        double gramos = kg * 1000;
+        return new Conversor(kg, "kg", gramos, "g");
+    }
+
+    public Conversor gramosAKilogramos(double gramos) {
+        // 1 g = 0.001 kg
+        double kg = gramos / 1000;
+        return new Conversor(gramos, "g", kg, "kg");
+    }
+
+    public Conversor gramosAMiligramos(double gramos) {
+        // 1 g = 1000 mg
+        double mg = gramos * 1000;
+        return new Conversor(gramos, "g", mg, "mg");
+    }
+
+    public Conversor miligramosAGramos(double mg) {
+        // 1 mg = 0.001 g
+        double gramos = mg / 1000;
+        return new Conversor(mg, "mg", gramos, "g");
+    }
+
+    public Conversor librasAKilogramos(double libras) {
+        // 1 lb = 0.453592 kg
+        double kg = libras * 0.453592;
+        return new Conversor(libras, "lb", kg, "kg");
+    }
+
+    public Conversor kilogramosALibras(double kg) {
+        // 1 kg = 2.20462 lb
+        double libras = kg * 2.20462;
+        return new Conversor(kg, "kg", libras, "lb");
+    }
+
+    public Conversor onzasAGramos(double oz) {
+        // 1 oz = 28.3495 g
+        double gramos = oz * 28.3495;
+        return new Conversor(oz, "oz", gramos, "g");
+    }
+
+    public Conversor gramosAOnzas(double gramos) {
+        // 1 g = 0.035274 oz
+        double oz = gramos * 0.035274;
+        return new Conversor(gramos, "g", oz, "oz");
+    }
+
+    public Conversor toneladasAKilogramos(double t) {
+        // 1 t = 1000 kg
+        double kg = t * 1000;
+        return new Conversor(t, "t", kg, "kg");
+    }
+
+    public Conversor kilogramosAToneladas(double kg) {
+        // 1 kg = 0.001 t
+        double t = kg / 1000;
+        return new Conversor(kg, "kg", t, "t");
+    }
 }

@@ -22,6 +22,14 @@ const OPERACIONES_LONGITUD_LIST = [
   { code: 'mi_km', label: 'Millas a Kilometros', method: 'convertirMillasAKm', param: 'millas' }
 ];
 
+const OPERACIONES_MASA_LIST = [
+  { code: 'kg_g', label: 'Kilogramos a Gramos', method: 'convertirKgAGramos', param: 'kilogramos' },
+  { code: 'g_mg', label: 'Gramos a Miligramos', method: 'convertirGramosAMg', param: 'gramos' },
+  { code: 'lb_kg', label: 'Libras a Kilogramos', method: 'convertirLibrasAKg', param: 'libras' },
+  { code: 'oz_g', label: 'Onzas a Gramos', method: 'convertirOnzasAGramos', param: 'onzas' },
+  { code: 't_kg', label: 'Toneladas a Kilogramos', method: 'convertirToneladasAKg', param: 'toneladas' }
+];
+
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [category, setCategory] = useState('Temperatura');
@@ -35,7 +43,10 @@ export default function App() {
 
   // Available operations depending on category
   const operationsList = useMemo(() => {
-    return category === 'Temperatura' ? OPERACIONES_TEMP_LIST : OPERACIONES_LONGITUD_LIST;
+    if (category === 'Temperatura') return OPERACIONES_TEMP_LIST;
+    if (category === 'Longitud') return OPERACIONES_LONGITUD_LIST;
+    if (category === 'Masa') return OPERACIONES_MASA_LIST;
+    return [];
   }, [category]);
 
   // Initialize selected operation when list changes
@@ -62,15 +73,21 @@ export default function App() {
 
   const handleCategoryChange = (newCategory: string) => {
     setCategory(newCategory);
-    const ops = newCategory === 'Temperatura' ? OPERACIONES_TEMP_LIST : OPERACIONES_LONGITUD_LIST;
-    setOperation(ops[0].code);
+    let ops: typeof OPERACIONES_TEMP_LIST = [];
+    if (newCategory === 'Temperatura') ops = OPERACIONES_TEMP_LIST;
+    else if (newCategory === 'Longitud') ops = OPERACIONES_LONGITUD_LIST;
+    else if (newCategory === 'Masa') ops = OPERACIONES_MASA_LIST;
+    setOperation(ops[0]?.code || '');
     setResultado('...');
   };
 
   const calcularSOAP = async () => {
     if (!valor) return Alert.alert("Aviso", "Ingresa un valor");
 
-    const ops = category === 'Temperatura' ? OPERACIONES_TEMP_LIST : OPERACIONES_LONGITUD_LIST;
+    let ops: typeof OPERACIONES_TEMP_LIST = [];
+    if (category === 'Temperatura') ops = OPERACIONES_TEMP_LIST;
+    else if (category === 'Longitud') ops = OPERACIONES_LONGITUD_LIST;
+    else if (category === 'Masa') ops = OPERACIONES_MASA_LIST;
     const op = ops.find(o => o.code === operation);
 
     if (!op) {
@@ -205,6 +222,12 @@ export default function App() {
           onPress={() => handleCategoryChange('Longitud')}
         >
           <Text style={styles.categoryBtnText}>Longitud</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={[styles.categoryBtn, category === 'Masa' && styles.activeCategoryBtn]}
+          onPress={() => handleCategoryChange('Masa')}
+        >
+          <Text style={styles.categoryBtnText}>Masa</Text>
         </TouchableOpacity>
       </View>
 

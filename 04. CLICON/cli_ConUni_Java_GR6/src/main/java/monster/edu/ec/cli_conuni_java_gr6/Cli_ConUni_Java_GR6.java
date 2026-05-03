@@ -39,17 +39,19 @@ public class Cli_ConUni_Java_GR6 {
                 mostrarMenuBanner();
                 System.out.println("1. Conversiones de temperatura");
                 System.out.println("2. Conversiones de longitud");
-                System.out.println("3. Salir");
-                opcion = leerEntero(sc, "Seleccione una opcion: ", 1, 3);
+                System.out.println("3. Conversiones de masa");
+                System.out.println("4. Salir");
+                opcion = leerEntero(sc, "Seleccione una opcion: ", 1, 4);
 
                 switch (opcion) {
                     case 1 -> mostrarMenuTemperatura(sc, port);
                     case 2 -> mostrarMenuLongitud(sc, port);
-                    case 3 -> System.out.println("\nGracias por usar el sistema. Adios");
+                    case 3 -> mostrarMenuMasa(sc, port);
+                    case 4 -> System.out.println("\nGracias por usar el sistema. Adios");
                     default -> { }
                 }
 
-            } while (opcion != 3);
+            } while (opcion != 4);
 
         } catch (Exception e) {
             System.out.println("Error de conexion con el servidor SOAP.");
@@ -118,6 +120,40 @@ public class Cli_ConUni_Java_GR6 {
                 case 3 -> res = port.convertirPulgadasACm(valor);
                 case 4 -> res = port.convertirPiesAMetros(valor);
                 case 5 -> res = port.convertirMillasAKm(valor);
+                default -> { }
+            }
+
+            if (res != null) {
+                mostrarResultado(res);
+            }
+        } while (true);
+    }
+
+    private static void mostrarMenuMasa(Scanner sc, ConversorWS port) {
+        int opcion;
+        do {
+            System.out.println("\n--- MASA ---");
+            System.out.println("1. Kilogramos a Gramos");
+            System.out.println("2. Gramos a Miligramos");
+            System.out.println("3. Libras a Kilogramos");
+            System.out.println("4. Onzas a Gramos");
+            System.out.println("5. Toneladas a Kilogramos");
+            System.out.println("0. Volver");
+            opcion = leerEntero(sc, "Seleccione una opcion: ", 0, 5);
+
+            if (opcion == 0) {
+                return;
+            }
+
+            double valor = leerDouble(sc, "Ingrese el valor a transformar: ");
+            Conversor res = null;
+
+            switch (opcion) {
+                case 1 -> res = port.convertirKgAGramos(valor);
+                case 2 -> res = port.convertirGramosAMg(valor);
+                case 3 -> res = port.convertirLibrasAKg(valor);
+                case 4 -> res = port.convertirOnzasAGramos(valor);
+                case 5 -> res = port.convertirToneladasAKg(valor);
                 default -> { }
             }
 

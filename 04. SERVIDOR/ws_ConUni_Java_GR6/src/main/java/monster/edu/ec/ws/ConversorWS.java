@@ -123,4 +123,56 @@ public class ConversorWS {
     public Conversor convertirCmAPulgadas(@WebParam(name = "centimetros") double cm) {
         return servicio.centimetrosAPulgadas(cm);
     }
+
+    // ============ CONVERSIONES DE MASA ============
+
+    @WebMethod(operationName = "convertirKgAGramos")
+    public Conversor convertirKgAGramos(@WebParam(name = "kilogramos") double kg) {
+        return servicio.kilogramosAGramos(kg);
+    }
+
+    @WebMethod(operationName = "convertirGramosAKg")
+    public Conversor convertirGramosAKg(@WebParam(name = "gramos") double gramos) {
+        return servicio.gramosAKilogramos(gramos);
+    }
+
+    @WebMethod(operationName = "convertirGramosAMg")
+    public Conversor convertirGramosAMg(@WebParam(name = "gramos") double gramos) {
+        return servicio.gramosAMiligramos(gramos);
+    }
+
+    @WebMethod(operationName = "convertirMgAGramos")
+    public Conversor convertirMgAGramos(@WebParam(name = "miligramos") double mg) {
+        return servicio.miligramosAGramos(mg);
+    }
+
+    @WebMethod(operationName = "convertirLibrasAKg")
+    public Conversor convertirLibrasAKg(@WebParam(name = "libras") double libras) {
+        return servicio.librasAKilogramos(libras);
+    }
+
+    @WebMethod(operationName = "convertirKgALibras")
+    public Conversor convertirKgALibras(@WebParam(name = "kilogramos") double kg) {
+        return servicio.kilogramosALibras(kg);
+    }
+
+    @WebMethod(operationName = "convertirOnzasAGramos")
+    public Conversor convertirOnzasAGramos(@WebParam(name = "onzas") double oz) {
+        return servicio.onzasAGramos(oz);
+    }
+
+    @WebMethod(operationName = "convertirGramosAOnzas")
+    public Conversor convertirGramosAOnzas(@WebParam(name = "gramos") double gramos) {
+        return servicio.gramosAOnzas(gramos);
+    }
+
+    @WebMethod(operationName = "convertirToneladasAKg")
+    public Conversor convertirToneladasAKg(@WebParam(name = "toneladas") double t) {
+        return servicio.toneladasAKilogramos(t);
+    }
+
+    @WebMethod(operationName = "convertirKgAToneladas")
+    public Conversor convertirKgAToneladas(@WebParam(name = "kilogramos") double kg) {
+        return servicio.kilogramosAToneladas(kg);
+    }
 }
