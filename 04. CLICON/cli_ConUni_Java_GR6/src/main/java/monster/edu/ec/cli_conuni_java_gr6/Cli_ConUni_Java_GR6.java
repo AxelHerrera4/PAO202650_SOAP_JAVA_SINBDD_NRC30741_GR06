@@ -7,84 +7,171 @@ import monster.edu.ec.cliente.Conversor;
 
 public class Cli_ConUni_Java_GR6 {
 
+    private static final String USUARIO = "monster";
+    private static final String CONTRASENA = "monster9";
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        boolean accesoConcedido = false;
-
-        // Bucle de Login: no termina hasta que las credenciales sean correctas
-        do {
-            System.out.println("=== LOGIN SISTEMA MONSTER ===");
+        while (true) {
+            mostrarEncabezado();
             System.out.print("Usuario: ");
-            String user = sc.nextLine();
+            String user = sc.nextLine().trim();
             System.out.print("Contrasena: ");
-            String pass = sc.nextLine();
+            String pass = sc.nextLine().trim();
 
-            if (user.equals("monster") && pass.equals("monster9")) {
-                System.out.println("\nAcceso concedido");
-                accesoConcedido = true;
-                mostrarMenu(sc);
-            } else {
-                System.out.println("\nCredenciales incorrectas. Intente de nuevo.\n");
+            if (USUARIO.equals(user) && CONTRASENA.equals(pass)) {
+                System.out.println("\nAcceso concedido.\n");
+                mostrarMenuPrincipal(sc);
+                break;
             }
-        } while (!accesoConcedido);
+
+            System.out.println("\nCredenciales incorrectas. Intente de nuevo.\n");
+        }
     }
 
-    public static void mostrarMenu(Scanner sc) {
+    private static void mostrarMenuPrincipal(Scanner sc) {
         try {
-            // Conexion al Web Service (Controlador Remoto)
             ConversorWS_Service service = new ConversorWS_Service();
             ConversorWS port = service.getConversorWSPort();
-            
+
             int opcion = 0;
             do {
-                System.out.println("\n--- MENU CONVERSOR GRUPO 6 ---");
-                System.out.println("1. Fahrenheit a Celsius");
-                System.out.println("2. Celsius a Fahrenheit");
-                System.out.println("3. Celsius a Kelvin");
-                System.out.println("4. Kelvin a Celsius");
-                System.out.println("5. Fahrenheit a Kelvin");
-                System.out.println("6. Kelvin a Fahrenheit");
-                System.out.println("7. Salir");
-                System.out.print("Seleccione una opcion: ");
-                
-                // Validacion simple para evitar errores si no ingresan un numero
-                while (!sc.hasNextInt()) {
-                    System.out.println("Por favor, ingrese un numero valido.");
-                    sc.next();
-                }
-                opcion = sc.nextInt();
+                mostrarMenuBanner();
+                System.out.println("1. Conversiones de temperatura");
+                System.out.println("2. Conversiones de longitud");
+                System.out.println("3. Salir");
+                opcion = leerEntero(sc, "Seleccione una opcion: ", 1, 3);
 
-                if (opcion >= 1 && opcion <= 6) {
-                    System.out.print("Ingrese el valor a transformar: ");
-                    double valor = sc.nextDouble();
-                    Conversor res = null;
-
-                    switch(opcion) {
-                        case 1: res = port.convertirFtoC(valor); break;
-                        case 2: res = port.convertirCtoF(valor); break;
-                        case 3: res = port.convertirCtoK(valor); break;
-                        case 4: res = port.convertirKtoC(valor); break;
-                        case 5: res = port.convertirFtoK(valor); break;
-                        case 6: res = port.convertirKtoF(valor); break;
-                    }
-
-                    if (res != null) {
-                        System.out.println("\n>> Resultado:");
-                        System.out.println(res.getValorOrigen() + " grados " + res.getUnidadOrigen() + 
-                                         " equivalen a " + res.getValorDestino() + " grados " + res.getUnidadDestino());
-                    }
-                } else if (opcion != 7) {
-                    System.out.println("Opcion no valida.");
+                switch (opcion) {
+                    case 1 -> mostrarMenuTemperatura(sc, port);
+                    case 2 -> mostrarMenuLongitud(sc, port);
+                    case 3 -> System.out.println("\nGracias por usar el sistema. Adios");
+                    default -> { }
                 }
 
-            } while (opcion != 7); // Salida con la opcion 7
-
-            System.out.println("Gracias por usar el sistema. Adios");
-            System.exit(0); // Cierra la aplicacion completamente al salir
+            } while (opcion != 3);
 
         } catch (Exception e) {
             System.out.println("Error de conexion con el servidor SOAP.");
             e.printStackTrace();
         }
+    }
+
+    private static void mostrarMenuTemperatura(Scanner sc, ConversorWS port) {
+        int opcion;
+        do {
+            System.out.println("\n--- TEMPERATURA ---");
+            System.out.println("1. Fahrenheit a Celsius");
+            System.out.println("2. Celsius a Fahrenheit");
+            System.out.println("3. Celsius a Kelvin");
+            System.out.println("4. Kelvin a Celsius");
+            System.out.println("5. Fahrenheit a Kelvin");
+            System.out.println("6. Kelvin a Fahrenheit");
+            System.out.println("0. Volver");
+            opcion = leerEntero(sc, "Seleccione una opcion: ", 0, 6);
+
+            if (opcion == 0) {
+                return;
+            }
+
+            double valor = leerDouble(sc, "Ingrese el valor a transformar: ");
+            Conversor res = null;
+
+            switch (opcion) {
+                case 1 -> res = port.convertirFtoC(valor);
+                case 2 -> res = port.convertirCtoF(valor);
+                case 3 -> res = port.convertirCtoK(valor);
+                case 4 -> res = port.convertirKtoC(valor);
+                case 5 -> res = port.convertirFtoK(valor);
+                case 6 -> res = port.convertirKtoF(valor);
+                default -> { }
+            }
+
+            if (res != null) {
+                mostrarResultado(res);
+            }
+        } while (true);
+    }
+
+    private static void mostrarMenuLongitud(Scanner sc, ConversorWS port) {
+        int opcion;
+        do {
+            System.out.println("\n--- LONGITUD ---");
+            System.out.println("1. Kilometros a Metros");
+            System.out.println("2. Metros a Centimetros");
+            System.out.println("3. Pulgadas a Centimetros");
+            System.out.println("4. Pies a Metros");
+            System.out.println("5. Millas a Kilometros");
+            System.out.println("0. Volver");
+            opcion = leerEntero(sc, "Seleccione una opcion: ", 0, 5);
+
+            if (opcion == 0) {
+                return;
+            }
+
+            double valor = leerDouble(sc, "Ingrese el valor a transformar: ");
+            Conversor res = null;
+
+            switch (opcion) {
+                case 1 -> res = port.convertirKmAMetros(valor);
+                case 2 -> res = port.convertirMetrosACm(valor);
+                case 3 -> res = port.convertirPulgadasACm(valor);
+                case 4 -> res = port.convertirPiesAMetros(valor);
+                case 5 -> res = port.convertirMillasAKm(valor);
+                default -> { }
+            }
+
+            if (res != null) {
+                mostrarResultado(res);
+            }
+        } while (true);
+    }
+
+    private static void mostrarEncabezado() {
+        System.out.println("====================================");
+        System.out.println("   SISTEMA MONSTER - CONVERSOR SOAP ");
+        System.out.println("====================================");
+    }
+
+    private static void mostrarMenuBanner() {
+        System.out.println("\n====================================");
+        System.out.println("        MENU PRINCIPAL DEL SISTEMA  ");
+        System.out.println("====================================");
+    }
+
+    private static int leerEntero(Scanner sc, String mensaje, int minimo, int maximo) {
+        while (true) {
+            System.out.print(mensaje);
+            String entrada = sc.nextLine().trim();
+            try {
+                int valor = Integer.parseInt(entrada);
+                if (valor >= minimo && valor <= maximo) {
+                    return valor;
+                }
+            } catch (NumberFormatException ex) {
+                // Se maneja abajo con el mensaje generico
+            }
+            System.out.println("Entrada invalida. Intente de nuevo.");
+        }
+    }
+
+    private static double leerDouble(Scanner sc, String mensaje) {
+        while (true) {
+            System.out.print(mensaje);
+            String entrada = sc.nextLine().trim();
+            try {
+                return Double.parseDouble(entrada);
+            } catch (NumberFormatException ex) {
+                System.out.println("Debe ingresar un numero valido.");
+            }
+        }
+    }
+
+    private static void mostrarResultado(Conversor res) {
+        System.out.println("\n>> Resultado");
+        System.out.println("------------------------------------");
+        System.out.println(res.getValorOrigen() + " " + res.getUnidadOrigen()
+                + " equivale a " + res.getValorDestino() + " " + res.getUnidadDestino());
+        System.out.println("------------------------------------\n");
     }
 }

@@ -11,6 +11,9 @@ package monster.edu.ec.cliesc_conuni_java_gr6;
 public class CLIESC_ConUni_Java_GR6 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        java.awt.EventQueue.invokeLater(() -> {
+            FrmLogin login = new FrmLogin();
+            login.setVisible(true);
+        });
     }
 }

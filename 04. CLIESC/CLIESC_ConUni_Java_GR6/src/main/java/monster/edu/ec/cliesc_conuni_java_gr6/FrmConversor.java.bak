@@ -267,10 +267,15 @@ public class FrmConversor extends JFrame {
             lblDescripcion.setText("Convierte entre kilometros, metros, centimetros, pulgadas, pies y millas.");
             cbOperacion.setModel(new DefaultComboBoxModel<>(new OperacionItem[] {
                 new OperacionItem("KmAMetros", "Kilometros a Metros", "Ingresa kilometros"),
+                new OperacionItem("MetrosAKm", "Metros a Kilometros", "Ingresa metros"),
                 new OperacionItem("MetrosACm", "Metros a Centimetros", "Ingresa metros"),
+                new OperacionItem("CmAMetros", "Centimetros a Metros", "Ingresa centimetros"),
                 new OperacionItem("PulgadasACm", "Pulgadas a Centimetros", "Ingresa pulgadas"),
+                new OperacionItem("CmAPulgadas", "Centimetros a Pulgadas", "Ingresa centimetros"),
                 new OperacionItem("PiesAMetros", "Pies a Metros", "Ingresa pies"),
+                new OperacionItem("MetrosAPies", "Metros a Pies", "Ingresa metros"),
                 new OperacionItem("MillasAKm", "Millas a Kilometros", "Ingresa millas"),
+                new OperacionItem("KmAMillas", "Kilometros a Millas", "Ingresa kilometros")
             }));
         }
 
@@ -315,10 +320,15 @@ public class FrmConversor extends JFrame {
             case "FtoK" -> port.convertirFtoK(valor);
             case "KtoF" -> port.convertirKtoF(valor);
             case "KmAMetros" -> port.convertirKmAMetros(valor);
+            case "MetrosAKm" -> port.convertirMetrosAKm(valor);
             case "MetrosACm" -> port.convertirMetrosACm(valor);
+            case "CmAMetros" -> port.convertirCmAMetros(valor);
             case "PulgadasACm" -> port.convertirPulgadasACm(valor);
+            case "CmAPulgadas" -> port.convertirCmAPulgadas(valor);
             case "PiesAMetros" -> port.convertirPiesAMetros(valor);
+            case "MetrosAPies" -> port.convertirMetrosAPies(valor);
             case "MillasAKm" -> port.convertirMillasAKm(valor);
+            case "KmAMillas" -> port.convertirKmAMillas(valor);
             default -> null;
         };
     }
