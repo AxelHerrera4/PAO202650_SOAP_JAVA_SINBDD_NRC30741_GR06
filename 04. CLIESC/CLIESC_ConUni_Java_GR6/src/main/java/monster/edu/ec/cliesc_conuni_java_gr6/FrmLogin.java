@@ -173,9 +173,11 @@ public class FrmLogin extends JFrame {
 
         if (USUARIO.equals(user) && PASSWORD.equals(pass)) {
             JOptionPane.showMessageDialog(this, "Acceso concedido. Bienvenido.", "Monster", JOptionPane.INFORMATION_MESSAGE);
-            FrmMenu menu = new FrmMenu();
-            menu.setVisible(true);
-            menu.setLocationRelativeTo(null);
+            
+            
+            FrmConversor conversor = new FrmConversor();
+            conversor.setVisible(true);
+            conversor.setLocationRelativeTo(null);
             dispose();
             return;
         }
