@@ -319,22 +319,22 @@ public class FrmConversor extends JFrame {
 
     private Conversor ejecutarOperacion(String codigo, double valor) {
         return switch (codigo) {
-            case "CtoF" -> port.convertirCtoF(valor);
-            case "FtoC" -> port.convertirFtoC(valor);
-            case "CtoK" -> port.convertirCtoK(valor);
-            case "KtoC" -> port.convertirKtoC(valor);
-            case "FtoK" -> port.convertirFtoK(valor);
-            case "KtoF" -> port.convertirKtoF(valor);
-            case "KmAMetros" -> port.convertirKmAMetros(valor);
-            case "MetrosACm" -> port.convertirMetrosACm(valor);
-            case "PulgadasACm" -> port.convertirPulgadasACm(valor);
-            case "PiesAMetros" -> port.convertirPiesAMetros(valor);
-            case "MillasAKm" -> port.convertirMillasAKm(valor);
-            case "KgAGramos" -> port.convertirKgAGramos(valor);
-            case "GramosAMg" -> port.convertirGramosAMg(valor);
-            case "LibrasAKg" -> port.convertirLibrasAKg(valor);
-            case "OnzasAGramos" -> port.convertirOnzasAGramos(valor);
-            case "ToneladasAKg" -> port.convertirToneladasAKg(valor);
+            case "CtoF" -> ConversorClient.convertirCtoF(valor);
+            case "FtoC" -> ConversorClient.convertirFtoC(valor);
+            case "CtoK" -> ConversorClient.convertirCtoK(valor);
+            case "KtoC" -> ConversorClient.convertirKtoC(valor);
+            case "FtoK" -> ConversorClient.convertirFtoK(valor);
+            case "KtoF" -> ConversorClient.convertirKtoF(valor);
+            case "KmAMetros" -> ConversorClient.convertirKmAMetros(valor);
+            case "MetrosACm" -> ConversorClient.convertirMetrosACm(valor);
+            case "PulgadasACm" -> ConversorClient.convertirPulgadasACm(valor);
+            case "PiesAMetros" -> ConversorClient.convertirPiesAMetros(valor);
+            case "MillasAKm" -> ConversorClient.convertirMillasAKm(valor);
+            case "KgAGramos" -> ConversorClient.convertirKgAGramos(valor);
+            case "GramosAMg" -> ConversorClient.convertirGramosAMg(valor);
+            case "LibrasAKg" -> ConversorClient.convertirLibrasAKg(valor);
+            case "OnzasAGramos" -> ConversorClient.convertirOnzasAGramos(valor);
+            case "ToneladasAKg" -> ConversorClient.convertirToneladasAKg(valor);
             default -> null;
         };
     }
