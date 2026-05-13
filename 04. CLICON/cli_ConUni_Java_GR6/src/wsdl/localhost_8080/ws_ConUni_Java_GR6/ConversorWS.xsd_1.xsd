@@ -1,43 +1,167 @@
-<?xml version='1.0' encoding='UTF-8'?><!-- Published by XML-WS Runtime (https://github.com/eclipse-ee4j/metro-jax-ws). Runtime's version is Eclipse Metro/4.0.4.payara-p1 (FISH-10142-Metro-4.0.4-fa01c0b; 2025-07-11T17:44:37+0100) XMLWS-Impl/4.0.3 XMLWS-API/4.0.2 XMLB-Impl/4.0.5 XMLB-API/4.0.2 git-revision#fa01c0b. --><xs:schema xmlns:tns="http://ws.ec.edu.monster/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.ec.edu.monster/">
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:tns="http://ws.ec.edu.monster/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.ec.edu.monster/">
 
-<xs:element name="convertirCtoF" type="tns:convertirCtoF"/>
+  <!-- ===== TEMPERATURA ===== -->
+  <xs:element name="convertirFtoC" type="tns:convertirFtoC"/>
+  <xs:element name="convertirFtoCResponse" type="tns:convertirFtoCResponse"/>
+  <xs:element name="convertirCtoF" type="tns:convertirCtoF"/>
+  <xs:element name="convertirCtoFResponse" type="tns:convertirCtoFResponse"/>
+  <xs:element name="convertirCtoK" type="tns:convertirCtoK"/>
+  <xs:element name="convertirCtoKResponse" type="tns:convertirCtoKResponse"/>
+  <xs:element name="convertirKtoC" type="tns:convertirKtoC"/>
+  <xs:element name="convertirKtoCResponse" type="tns:convertirKtoCResponse"/>
+  <xs:element name="convertirFtoK" type="tns:convertirFtoK"/>
+  <xs:element name="convertirFtoKResponse" type="tns:convertirFtoKResponse"/>
+  <xs:element name="convertirKtoF" type="tns:convertirKtoF"/>
+  <xs:element name="convertirKtoFResponse" type="tns:convertirKtoFResponse"/>
 
-<xs:element name="convertirCtoFResponse" type="tns:convertirCtoFResponse"/>
+  <!-- ===== LONGITUD ===== -->
+  <xs:element name="convertirKmAMetros" type="tns:convertirKmAMetros"/>
+  <xs:element name="convertirKmAMetrosResponse" type="tns:convertirKmAMetrosResponse"/>
+  <xs:element name="convertirMetrosACm" type="tns:convertirMetrosACm"/>
+  <xs:element name="convertirMetrosACmResponse" type="tns:convertirMetrosACmResponse"/>
+  <xs:element name="convertirPulgadasACm" type="tns:convertirPulgadasACm"/>
+  <xs:element name="convertirPulgadasACmResponse" type="tns:convertirPulgadasACmResponse"/>
+  <xs:element name="convertirPiesAMetros" type="tns:convertirPiesAMetros"/>
+  <xs:element name="convertirPiesAMetrosResponse" type="tns:convertirPiesAMetrosResponse"/>
+  <xs:element name="convertirMillasAKm" type="tns:convertirMillasAKm"/>
+  <xs:element name="convertirMillasAKmResponse" type="tns:convertirMillasAKmResponse"/>
 
-<xs:element name="convertirFtoC" type="tns:convertirFtoC"/>
+  <!-- ===== MASA ===== -->
+  <xs:element name="convertirKgAGramos" type="tns:convertirKgAGramos"/>
+  <xs:element name="convertirKgAGramosResponse" type="tns:convertirKgAGramosResponse"/>
+  <xs:element name="convertirGramosAMg" type="tns:convertirGramosAMg"/>
+  <xs:element name="convertirGramosAMgResponse" type="tns:convertirGramosAMgResponse"/>
+  <xs:element name="convertirLibrasAKg" type="tns:convertirLibrasAKg"/>
+  <xs:element name="convertirLibrasAKgResponse" type="tns:convertirLibrasAKgResponse"/>
+  <xs:element name="convertirOnzasAGramos" type="tns:convertirOnzasAGramos"/>
+  <xs:element name="convertirOnzasAGramosResponse" type="tns:convertirOnzasAGramosResponse"/>
+  <xs:element name="convertirToneladasAKg" type="tns:convertirToneladasAKg"/>
+  <xs:element name="convertirToneladasAKgResponse" type="tns:convertirToneladasAKgResponse"/>
 
-<xs:element name="convertirFtoCResponse" type="tns:convertirFtoCResponse"/>
+  <!-- ===== TIPO RESULTADO ===== -->
+  <xs:complexType name="Conversor">
+    <xs:sequence>
+      <xs:element name="unidadDestino" type="xs:string" minOccurs="0"/>
+      <xs:element name="unidadOrigen" type="xs:string" minOccurs="0"/>
+      <xs:element name="valorDestino" type="xs:double"/>
+      <xs:element name="valorOrigen" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
 
-<xs:complexType name="convertirFtoC">
-<xs:sequence>
-<xs:element name="gradosF" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
+  <!-- ===== TIPOS TEMPERATURA ===== -->
+  <xs:complexType name="convertirFtoC">
+    <xs:sequence><xs:element name="gradosF" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirFtoCResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
 
-<xs:complexType name="convertirFtoCResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:Conversor" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
+  <xs:complexType name="convertirCtoF">
+    <xs:sequence><xs:element name="gradosC" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirCtoFResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
 
-<xs:complexType name="Conversor">
-<xs:sequence>
-<xs:element name="unidadDestino" type="xs:string" minOccurs="0"/>
-<xs:element name="unidadOrigen" type="xs:string" minOccurs="0"/>
-<xs:element name="valorDestino" type="xs:double"/>
-<xs:element name="valorOrigen" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
+  <xs:complexType name="convertirCtoK">
+    <xs:sequence><xs:element name="gradosC" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirCtoKResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
 
-<xs:complexType name="convertirCtoF">
-<xs:sequence>
-<xs:element name="gradosC" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
+  <xs:complexType name="convertirKtoC">
+    <xs:sequence><xs:element name="gradosK" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirKtoCResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
 
-<xs:complexType name="convertirCtoFResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:Conversor" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
+  <xs:complexType name="convertirFtoK">
+    <xs:sequence><xs:element name="gradosF" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirFtoKResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="convertirKtoF">
+    <xs:sequence><xs:element name="gradosK" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirKtoFResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
+
+  <!-- ===== TIPOS LONGITUD ===== -->
+  <xs:complexType name="convertirKmAMetros">
+    <xs:sequence><xs:element name="kilometros" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirKmAMetrosResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="convertirMetrosACm">
+    <xs:sequence><xs:element name="metros" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirMetrosACmResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="convertirPulgadasACm">
+    <xs:sequence><xs:element name="pulgadas" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirPulgadasACmResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="convertirPiesAMetros">
+    <xs:sequence><xs:element name="pies" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirPiesAMetrosResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="convertirMillasAKm">
+    <xs:sequence><xs:element name="millas" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirMillasAKmResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
+
+  <!-- ===== TIPOS MASA ===== -->
+  <xs:complexType name="convertirKgAGramos">
+    <xs:sequence><xs:element name="kilogramos" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirKgAGramosResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="convertirGramosAMg">
+    <xs:sequence><xs:element name="gramos" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirGramosAMgResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="convertirLibrasAKg">
+    <xs:sequence><xs:element name="libras" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirLibrasAKgResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="convertirOnzasAGramos">
+    <xs:sequence><xs:element name="onzas" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirOnzasAGramosResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="convertirToneladasAKg">
+    <xs:sequence><xs:element name="toneladas" type="xs:double"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="convertirToneladasAKgResponse">
+    <xs:sequence><xs:element name="return" type="tns:Conversor" minOccurs="0"/></xs:sequence>
+  </xs:complexType>
+
 </xs:schema>

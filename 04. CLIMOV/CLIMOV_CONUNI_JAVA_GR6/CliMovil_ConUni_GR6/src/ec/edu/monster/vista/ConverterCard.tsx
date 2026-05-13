@@ -48,7 +48,9 @@ export const ConverterCard: React.FC<ConverterCardProps> = ({
         <Text style={styles.headerDescription}>
           {category === 'Temperatura'
             ? 'Convierte entre Celsius, Fahrenheit y Kelvin'
-            : 'Convierte entre Kilometros, Metros, Centimetros, Pulgadas, Pies y Millas'}
+            : category === 'Longitud'
+            ? 'Convierte entre Kilometros, Metros, Centimetros, Pulgadas, Pies y Millas'
+            : 'Convierte entre Kilogramos, Gramos, Miligramos, Libras, Onzas y Toneladas'}
         </Text>
       </View>
 

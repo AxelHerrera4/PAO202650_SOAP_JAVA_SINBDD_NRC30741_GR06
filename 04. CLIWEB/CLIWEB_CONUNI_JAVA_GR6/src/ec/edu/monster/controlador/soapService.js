@@ -1,4 +1,4 @@
-const WS_URL = 'http://localhost:8080/ws_ConUni_Java_GR6/ConversorWS'
+const WS_URL = 'http://192.168.137.171:8080/ws_ConUni_Java_GR6/ConversorWS'
 
 export function buildSoapEnvelope(method, paramName, valor) {
   return `<?xml version='1.0' encoding='UTF-8'?>\n<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.ec.edu.monster/">\n  <soapenv:Header/>\n  <soapenv:Body>\n    <ws:${method}>\n      <${paramName}>${valor}</${paramName}>\n    </ws:${method}>\n  </soapenv:Body>\n</soapenv:Envelope>`

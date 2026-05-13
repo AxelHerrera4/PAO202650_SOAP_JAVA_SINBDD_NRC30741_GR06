@@ -1,9 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Alert } from 'react-native';
-import { OPERACIONES_TEMP_LIST, OPERACIONES_LONGITUD_LIST, OPERACIONES_MASA_LIST } from '../../../src/ec/edu/monster/model/operaciones';
-import { invokeSoap } from '../../../src/ec/edu/monster/controlador/soapService';
-import { LoginCard } from '../../../src/ec/edu/monster/vista/LoginCard';
-import { ConverterCard } from '../../../src/ec/edu/monster/vista/ConverterCard';
+import { OPERACIONES_TEMP_LIST, OPERACIONES_LONGITUD_LIST, OPERACIONES_MASA_LIST } from '../../src/ec/edu/monster/model/operaciones';
+import { invokeSoap } from '../../src/ec/edu/monster/controlador/soapService';
+import { LoginCard } from '../../src/ec/edu/monster/vista/LoginCard';
+import { ConverterCard } from '../../src/ec/edu/monster/vista/ConverterCard';
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

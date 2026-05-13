@@ -40,10 +40,13 @@
                             <goal>wsimport</goal>
                         </goals>
                         <configuration>
-                            <!-- La URL que ya comprobamos que funciona -->
-                            <wsdlUrls>
-                                <wsdlUrl>http://localhost:8080/ws_ConUni_Java_GR6/ConversorWS?wsdl</wsdlUrl>
-                            </wsdlUrls>
+                            <!-- WSDL local para no depender del servidor -->
+                            <wsdlDirectory>${project.basedir}/src/wsdl/localhost_8080/ws_ConUni_Java_GR6</wsdlDirectory>
+                            <wsdlFiles>
+                                <wsdlFile>ConversorWS.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <!-- Catálogo que mapea URLs del WSDL a archivos locales -->
+                            <catalog>${project.basedir}/src/jax-ws-catalog.xml</catalog>
                             <!-- El paquete donde se crearán tus clases -->
                             <packageName>monster.edu.ec.cliente</packageName>
                             <sourceDestDir>${project.build.directory}/generated-sources/jaxws-wsimport</sourceDestDir>

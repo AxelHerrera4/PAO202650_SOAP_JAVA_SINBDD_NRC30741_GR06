@@ -1,4 +1,4 @@
-const WS_URL = "http://localhost:8080/ws_ConUni_Java_GR6/ConversorWS";
+const WS_URL = "http://192.168.137.171:8080/ws_ConUni_Java_GR6/ConversorWS";
 
 export const buildSoapEnvelope = (method: string, param: string, valor: string): string => {
   return `<?xml version="1.0" encoding="UTF-8"?>

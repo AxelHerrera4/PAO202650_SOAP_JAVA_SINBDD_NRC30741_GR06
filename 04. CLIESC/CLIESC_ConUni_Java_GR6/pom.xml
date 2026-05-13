@@ -39,7 +39,7 @@
                         </goals>
                         <configuration>
                             <wsdlUrls>
-                                <wsdlUrl>http://localhost:8080/ws_ConUni_Java_GR6/ConversorWS?wsdl</wsdlUrl>
+                                <wsdlUrl>http://192.168.137.171:8080/ws_ConUni_Java_GR6/ConversorWS?wsdl</wsdlUrl>
                             </wsdlUrls>
                             <packageName>monster.edu.ec.cliente</packageName>
                             <sourceDestDir>${project.build.directory}/generated-sources/jaxws-wsimport</sourceDestDir>
